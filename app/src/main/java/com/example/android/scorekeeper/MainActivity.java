@@ -59,17 +59,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Suzy's "Surprise" button was clicked. This looks at the number of times
-     * Suzy picked $50. If she picked $50 five or more times, she'll lose all her money.
-     * If she picked $50 zero times, her score triples. If she only picked $50 once,
-     * her score doubles. If the starting score is zero, the Surprise button adds a random
-     * amount between $10 and $50.
+     * If the player has zero dollars, the Surprise button adds a random
+     * amount of money between $10 and $50. Otherwise, this method looks at the number
+     * of times the player has selected the $50 button since that player's score was reset to 0
+     * (either through a Surprise or Game Reset). The number of times the player has selected $50
+     * is kept track of through the int variable "numberOfTimesSuzyPicked50,"
+     * which is reset to 0 whenever the player's earnings are reset to 0.
+     * If the player has not clicked the $50 button since the last reset,
+     * the player's earnings are tripled. If the player picked $50 once since reset,
+     * the player's earnings are doubled. If the player picked $50 two or more times
+     * since the last reset to 0, a random number between 1 and 10 is generated.
+     * If the random number is less than or equal to 5, the player's earnings are
+     * reset to 0. If the random number is greater than or equal to 6,
+     * the player's earnings are tripled. Players may not choose the Surprise option
+     * twice in a row.
      */
+
     public void surpriseSuzy(View view) {
         //Creates temporary string to store Suzy Game Alert Message
-        String suzyStatusMsg = "";
+        String suzyStatusMsg;
         TextView gameStatus = (TextView) findViewById(R.id.game_status_text_view);
         numberOfTimesSuzySurprised = numberOfTimesSuzySurprised + 1;
+        //This if statement prevents the player from choosing Surprise twice in a row
         if (numberOfTimesSuzySurprised >= 2) {
             suzyStatusMsg = "Sorry, Suzy. " + getString(R.string.noDoubleSurprise);
             gameStatus.setText(suzyStatusMsg);
@@ -106,25 +117,33 @@ public class MainActivity extends AppCompatActivity {
                     gameStatus.setVisibility(View.VISIBLE);
                     //Display Suzy's updated earnings
                     displayForSuzy(scoreSuzy);
-                } else if (numberOfTimesSuzyPicked50 == 2) {
-                    scoreSuzy = scoreSuzy + 5;
-                    suzyStatusMsg = getString(R.string.fiveDollarEarningsSuzy);
-                    //Display game status message
-                    gameStatus.setText(suzyStatusMsg);
-                    //Make Game Status Visible
-                    gameStatus.setVisibility(View.VISIBLE);
-                    //Display Suzy's updated earnings
-                    displayForSuzy(scoreSuzy);
+
                 } else {
-                    scoreSuzy = 0;
-                    numberOfTimesSuzyPicked50 = 0;
-                    suzyStatusMsg = getString(R.string.backToZeroSuzy);
-                    //Display game status message
-                    gameStatus.setText(suzyStatusMsg);
-                    //Make Game Status Visible
-                    gameStatus.setVisibility(View.VISIBLE);
-                    //Display Suzy's updated earnings
-                    displayForSuzy(scoreSuzy);
+                    //Creates random integer between 1 and 10 and checks if less than 5
+                    int random = 1 + (int) (Math.random() * (10));
+                    if (random <= 5) {
+                        //Sets Suzy's earnings to zero and resets $50 count to 0
+                        scoreSuzy = 0;
+                        numberOfTimesSuzyPicked50 = 0;
+                        suzyStatusMsg = getString(R.string.backToZeroSuzy);
+                        //Display game status message
+                        gameStatus.setText(suzyStatusMsg);
+                        //Make Game Status Visible
+                        gameStatus.setVisibility(View.VISIBLE);
+                        //Display Suzy's updated earnings
+                        displayForSuzy(scoreSuzy);
+                    } else {
+                        //If the random integer created in the if statement was 6 or more
+                        scoreSuzy = scoreSuzy * 3;
+                        suzyStatusMsg = getString(R.string.tripleEarningsSuzy);
+                        //Display game status message
+                        gameStatus.setText(suzyStatusMsg);
+                        //Make Game Status Visible
+                        gameStatus.setVisibility(View.VISIBLE);
+                        //Display Suzy's updated earnings
+                        displayForSuzy(scoreSuzy);
+                    }
+
                 }
             }
         }
@@ -166,17 +185,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Mike's "Surprise" button was clicked. This looks at the number of times
-     * Mike picked $50. If he picked $50 three or more times, he'll lose all his money.
-     * If he picked $50 zero times, his score triples. If he only picked $50 once,
-     * his score doubles. If the starting score is zero, the Surprise button adds a random
-     * amount between $10 and $50.
+     * If the player has zero dollars, the Surprise button adds a random
+     * amount of money between $10 and $50. Otherwise, this method looks at the number
+     * of times the player has selected the $50 button since that player's score was reset to 0
+     * (either through a Surprise or Game Reset). The number of times the player has selected $50
+     * is kept track of through the int variable "numberOfTimesMikePicked50,"
+     * which is reset to 0 whenever the player's earnings are reset to 0.
+     * If the player has not clicked the $50 button since the last reset,
+     * the player's earnings are tripled. If the player picked $50 once since reset,
+     * the player's earnings are doubled. If the player picked $50 two or more times
+     * since the last reset to 0, a random number between 1 and 10 is generated.
+     * If the random number is less than or equal to 5, the player's earnings are
+     * reset to 0. If the random number is greater than or equal to 6,
+     * the player's earnings are tripled. Players may not choose the Surprise option
+     * twice in a row.
      */
     public void surpriseMike(View view) {
         //Creates temporary string to store Mike Game Alert Message
-        String mikeStatusMsg = "";
+        String mikeStatusMsg;
         TextView gameStatus = (TextView) findViewById(R.id.game_status_text_view);
         numberOfTimesMikeSurprised = numberOfTimesMikeSurprised + 1;
+        //This if statement prevents the player from choosing Surprise twice in a row
         if (numberOfTimesMikeSurprised >= 2) {
             mikeStatusMsg = "Sorry, Mike. " + getString(R.string.noDoubleSurprise);
             gameStatus.setText(mikeStatusMsg);
@@ -213,26 +242,33 @@ public class MainActivity extends AppCompatActivity {
                     gameStatus.setVisibility(View.VISIBLE);
                     //Display Mike's updated earnings
                     displayForMike(scoreMike);
-                } else if (numberOfTimesMikePicked50 == 2) {
-                    scoreMike = scoreMike + 5;
-                    mikeStatusMsg = getString(R.string.fiveDollarEarningsMike);
-                    //Display game status message
-                    gameStatus.setText(mikeStatusMsg);
-                    //Make Game Status Visible
-                    gameStatus.setVisibility(View.VISIBLE);
-                    //Display Suzy's updated earnings
-                    displayForSuzy(scoreSuzy);
+
                 } else {
-                    //Sets Mike's earnings to zero and resets $50 count to 0
-                    scoreMike = 0;
-                    numberOfTimesMikePicked50 = 0;
-                    mikeStatusMsg = getString(R.string.backToZeroMike);
-                    //Display game status message
-                    gameStatus.setText(mikeStatusMsg);
-                    //Make Game Status Visible
-                    gameStatus.setVisibility(View.VISIBLE);
-                    //Display Mike's updated earnings
-                    displayForMike(scoreMike);
+                    //Creates random integer between 1 and 10 and checks if less than 5
+                    int random = 1 + (int) (Math.random() * (10));
+                    if (random <= 5) {
+                        //Sets Mike's earnings to zero and resets $50 count to 0
+                        scoreMike = 0;
+                        numberOfTimesMikePicked50 = 0;
+                        mikeStatusMsg = getString(R.string.backToZeroMike);
+                        //Display game status message
+                        gameStatus.setText(mikeStatusMsg);
+                        //Make Game Status Visible
+                        gameStatus.setVisibility(View.VISIBLE);
+                        //Display Mike's updated earnings
+                        displayForMike(scoreMike);
+                    } else {
+                        //If the random integer created in the if statement was 6 or more
+                        scoreMike = scoreMike * 3;
+                        mikeStatusMsg = getString(R.string.tripleEarningsMike);
+                        //Display game status message
+                        gameStatus.setText(mikeStatusMsg);
+                        //Make Game Status Visible
+                        gameStatus.setVisibility(View.VISIBLE);
+                        //Display Mike's updated earnings
+                        displayForMike(scoreMike);
+                    }
+
                 }
             }
         }

@@ -96,7 +96,6 @@
             </LinearLayout>
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -139,9 +138,6 @@
                     android:onClick="surpriseMike"
                     android:text="Surprise" />
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
-
-
 </RelativeLayout>
