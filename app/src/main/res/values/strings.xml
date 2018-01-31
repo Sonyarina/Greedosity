@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Greedosity!</string>
+    <string name="suzyTotal">$0</string>
+    <string name="mikeTotal">$0</string>
+    <string name="startNewGame">Good Luck! Let\'s begin!</string>
+    <string name="noDoubleSurprise">You can\'t get back to back surprises!</string>
+    <string name="surpriseAmountEarnedSuzy">Congrats, Suzy! You just earned $"</string>
+    <string name="backToZeroSuzy">Bummer. Suzy just lost everything!</string>
+    <string name="tripleEarningsSuzy">Wowzer! Suzy just tripled her earnings!</string>
+    <string name="doubleEarningsSuzy">Oh my! Suzy just doubled her earnings!</string>
+    <string name="surpriseAmountEarnedMike">Congrats, Mike! You just earned $"</string>
+    <string name="backToZeroMike">Bummer. Mike just lost everything!</string>
+    <string name="tripleEarningsMike">Wowzer! Mike just tripled his earnings!</string>
+    <string name="doubleEarningsMike">Oh my! Mike just doubled his earnings!</string>
+    <string name="tenDollarsSuzy">Suzy just added $10 dollars!</string>
+    <string name="fiftyDollarsSuzy">Whoa! Adding 50 big ones to Suzy\'s account!</string>
+    <string name="tenDollarsMike">Mike just added $10 dollars!</string>
+    <string name="fiftyDollarsMike">Whoa! Adding 50 big ones to Mike\'s account!</string>
+    <string name="fiveDollarEarningsSuzy">$5 more bucks for Suzy</string>
+    <string name="fiveDollarEarningsMike">$5 more bucks for Mike</string>
+</resources>

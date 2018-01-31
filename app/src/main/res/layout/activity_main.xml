@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.scorekeeper.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/greed3" />
+
+    <ImageView
+        android:id="@+id/greedosity"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/greedosity6" />
+
+    <TextView
+        android:id="@+id/game_status_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/greedosity"
+        android:layout_marginTop="8dp"
+        android:background="#000"
+        android:gravity="center_horizontal"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:text=""
+        android:textColor="#03fa15"
+        android:textSize="16sp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/reset_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@id/game_status_text_view"
+        android:layout_centerHorizontal="true"
+        android:onClick="resetGameScore"
+        android:text="New Game"
+        android:textColor="#fff" />
+
+    <LinearLayout
+        android:id="@+id/myLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/suzy333" />
+
+            <TextView
+                style="@style/PlayerNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Suzy" />
+
+            <TextView
+                android:id="@+id/suzy_earnings"
+                style="@style/PlayerEarningsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/suzyTotal" />
+
+            <LinearLayout style="@style/podium_style">
+
+                <Button
+                    style="@style/buttonStyles"
+                    android:onClick="addTenDollarsSuzy"
+                    android:text="$10" />
+
+                <Button
+                    style="@style/buttonStyles"
+                    android:onClick="addFiftyDollarsSuzy"
+                    android:text="$50" />
+
+                <Button
+                    style="@style/buttonStyles"
+                    android:onClick="surpriseSuzy"
+                    android:text="Surprise" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/mike333" />
+
+            <TextView
+                style="@style/PlayerNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mike" />
+
+            <TextView
+                android:id="@+id/mike_earnings"
+                style="@style/PlayerEarningsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mikeTotal" />
+
+            <LinearLayout style="@style/podium_style">
+
+                <Button
+                    style="@style/buttonStyles"
+                    android:onClick="addTenDollarsMike"
+                    android:text="$10" />
+
+                <Button
+                    style="@style/buttonStyles"
+                    android:onClick="addFiftyDollarsMike"
+                    android:text="$50" />
+
+                <Button
+                    style="@style/buttonStyles"
+                    android:onClick="surpriseMike"
+                    android:text="Surprise" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
