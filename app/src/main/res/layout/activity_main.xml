@@ -50,100 +50,101 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
-    <LinearLayout
-        android:id="@+id/myLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/myLinearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/suzy333" />
-
-            <TextView
-                style="@style/PlayerNameText"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Suzy" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/suzy_earnings"
-                style="@style/PlayerEarningsText"
-                android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/suzy333" />
+
+                <TextView
+                    style="@style/PlayerNameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Suzy" />
+
+                <TextView
+                    android:id="@+id/suzy_earnings"
+                    style="@style/PlayerEarningsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/suzyTotal" />
+
+                <LinearLayout style="@style/podium_style">
+
+                    <Button
+                        style="@style/buttonStyles"
+                        android:onClick="addTenDollarsSuzy"
+                        android:text="$10" />
+
+                    <Button
+                        style="@style/buttonStyles"
+                        android:onClick="addFiftyDollarsSuzy"
+                        android:text="$50" />
+
+                    <Button
+                        style="@style/buttonStyles"
+                        android:onClick="surpriseSuzy"
+                        android:text="Surprise" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/suzyTotal" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <LinearLayout style="@style/podium_style">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/mike333" />
 
-                <Button
-                    style="@style/buttonStyles"
-                    android:onClick="addTenDollarsSuzy"
-                    android:text="$10" />
+                <TextView
+                    style="@style/PlayerNameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mike" />
 
-                <Button
-                    style="@style/buttonStyles"
-                    android:onClick="addFiftyDollarsSuzy"
-                    android:text="$50" />
+                <TextView
+                    android:id="@+id/mike_earnings"
+                    style="@style/PlayerEarningsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mikeTotal" />
 
-                <Button
-                    style="@style/buttonStyles"
-                    android:onClick="surpriseSuzy"
-                    android:text="Surprise" />
+                <LinearLayout style="@style/podium_style">
+
+                    <Button
+                        style="@style/buttonStyles"
+                        android:onClick="addTenDollarsMike"
+                        android:text="$10" />
+
+                    <Button
+                        style="@style/buttonStyles"
+                        android:onClick="addFiftyDollarsMike"
+                        android:text="$50" />
+
+                    <Button
+                        style="@style/buttonStyles"
+                        android:onClick="surpriseMike"
+                        android:text="Surprise" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/mike333" />
-
-            <TextView
-                style="@style/PlayerNameText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mike" />
-
-            <TextView
-                android:id="@+id/mike_earnings"
-                style="@style/PlayerEarningsText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/mikeTotal" />
-
-            <LinearLayout style="@style/podium_style">
-
-                <Button
-                    style="@style/buttonStyles"
-                    android:onClick="addTenDollarsMike"
-                    android:text="$10" />
-
-                <Button
-                    style="@style/buttonStyles"
-                    android:onClick="addFiftyDollarsMike"
-                    android:text="$50" />
-
-                <Button
-                    style="@style/buttonStyles"
-                    android:onClick="surpriseMike"
-                    android:text="Surprise" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
     </ScrollView>
 </RelativeLayout>

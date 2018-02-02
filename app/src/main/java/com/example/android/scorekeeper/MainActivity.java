@@ -10,6 +10,7 @@ import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Added strings that will save the activity data
     private final static String GAME_STATUS_KEY = "game_status_key";
     private final static String SUZY_SCORE_VIEW_KEY = "suzy_score_view_key";
     private final static String MIKE_SCORE_VIEW_KEY = "mike_score_view_key";
@@ -19,13 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private final static String MIKE_PICKED_50_KEY = "mike_picked_50_key";
     private final static String SUZY_SURPRISED_KEY = "suzy_surprised_key";
     private final static String MIKE_SURPRISED_KEY = "mike_surprised_key";
-
-/*    private final static int MIKE_PICKED_50_KEY = 0;
-    private final static int SUZY_SURPRISED_KEY = 0;
-    private final static int MIKE_SURPRISED_KEY = 0;*/
-
-
-    //may need to remove initialization
 
     int scoreSuzy = 0;
     int scoreMike = 0;
@@ -71,30 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         } else {
+            // Shows a "New Game" message on the screen if no information was saved
             Toast.makeText(MainActivity.this, "New Game", Toast.LENGTH_SHORT).show();
         }
     }
-
-/*    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        String stateSaved = savedInstanceState.getString("saved_state");
-        if (stateSaved == null) {
-            Toast.makeText(MainActivity.this,
-                    "onRestoreInstanceState:\n" +
-                            "NO state saved!",
-                    Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(MainActivity.this,
-                    "onRestoreInstanceState:\n" +
-                            "saved state = " + stateSaved,
-                    Toast.LENGTH_LONG).show();
-            gameStatus.setText(stateSaved);
-            suzyScoreDisplay.setText(stateSaved);
-            mikeScoreDisplay.setText(stateSaved);
-
-        }
-    }*/
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
@@ -108,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putInt(SUZY_SCORE_KEY, scoreSuzy);
         savedInstanceState.putInt(MIKE_SCORE_KEY, scoreMike);
 
-
         //Saves the current number of times that Suzy and Mike clicked the $50 button since reset
         savedInstanceState.putInt(SUZY_PICKED_50_KEY, numberOfTimesSuzyPicked50);
         savedInstanceState.putInt(MIKE_PICKED_50_KEY, numberOfTimesMikePicked50);
@@ -118,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putInt(MIKE_SURPRISED_KEY, numberOfTimesMikeSurprised);
 
         super.onSaveInstanceState(savedInstanceState);
-
-
     }
 
     /**
@@ -155,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         scoreSuzy = scoreSuzy + 50;
         numberOfTimesSuzyPicked50 = numberOfTimesSuzyPicked50 + 1;
         displayForSuzy(scoreSuzy);
-
+        //Shows number of times Suzy picked $50 button
         Toast.makeText(MainActivity.this,
                 "Suzy $50 clicks: " +
                         numberOfTimesSuzyPicked50,
@@ -247,7 +218,6 @@ public class MainActivity extends AppCompatActivity {
                         //Display Suzy's updated earnings
                         displayForSuzy(scoreSuzy);
                     }
-
                 }
             }
         }
@@ -377,7 +347,6 @@ public class MainActivity extends AppCompatActivity {
                         //Display Mike's updated earnings
                         displayForMike(scoreMike);
                     }
-
                 }
             }
         }
