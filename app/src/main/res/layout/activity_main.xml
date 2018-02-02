@@ -38,13 +38,18 @@
     <Button
         android:id="@+id/reset_game_button"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_below="@id/game_status_text_view"
+        android:layout_height="40dp"
+        android:layout_below="@+id/game_status_text_view"
         android:layout_centerHorizontal="true"
+        android:background="#f9009e"
         android:onClick="resetGameScore"
         android:text="New Game"
         android:textColor="#fff" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
     <LinearLayout
         android:id="@+id/myLinearLayout"
         android:layout_width="match_parent"
@@ -140,4 +145,5 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
