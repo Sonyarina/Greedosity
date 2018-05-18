@@ -1,11 +1,45 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary theme color of the app (sets background color of app bar) -->
-        <item name="colorPrimary">#00695c</item>
-        <item name="android:colorPrimaryDark">#00695c</item>
+        <item name="colorPrimary">@color/primaryDarkColor2</item>
+        <item name="android:colorPrimaryDark" tools:targetApi="21">@color/midGreen</item>
         <!-- Background color of buttons in the app -->
-        <item name="colorButtonNormal">#16677c</item>
+    </style>
+
+    <style name="avatar_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="avatar_style_land">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">110dp</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="buttonStyles">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">43dp</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@color/blueGreen</item>
+        <item name="android:textColor">@color/crystalColor</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="buttonStyles_land">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:background">@color/blueGreen</item>
+        <item name="android:textColor">@color/crystalColor</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="PlayerNameText">
@@ -16,11 +50,26 @@
         <item name="android:layout_marginRight">30dp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:paddingBottom">4dp</item>
-        <item name="android:background">@drawable/border2</item>
+        <item name="android:background">@drawable/name_background</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#C0C0C0</item>
+        <item name="android:textColor">@color/primaryTextColor2</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">casual</item>
+        <item name="android:fontFamily" tools:targetApi="16">casual</item>
+    </style>
+
+    <style name="PlayerNameText_landscape">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">70dp</item>
+        <item name="android:layout_marginRight">70dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:background">@drawable/name_background</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryTextColor2</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily" tools:targetApi="16">casual</item>
     </style>
 
     <style name="PlayerEarningsText">
@@ -32,19 +81,16 @@
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textSize">30sp</item>
-        <item name="android:background">@drawable/border1</item>
-        <item name="android:textColor">#f0f0</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:background">@drawable/score_background</item>
+        <item name="android:textColor">@color/scoreColor</item>
+        <item name="android:fontFamily" tools:targetApi="16">sans-serif</item>
     </style>
 
-    <style name="buttonStyles">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_marginLeft">24dp</item>
-        <item name="android:layout_marginRight">24dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:textColor">#f5f5f5</item>
-        <item name="android:textSize">18sp</item>
+    <style name="player_linear_layout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
     <style name="podium_style">
@@ -52,28 +98,17 @@
         <item name="android:layout_height">180dp</item>
         <item name="android:layout_marginLeft">18dp</item>
         <item name="android:layout_marginRight">18dp</item>
-        <item name="android:background">@drawable/metallic3</item>
+        <item name="android:background">@drawable/metallic_background</item>
         <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="buttonStyles_land">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">45dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:textColor">#f5f5f5</item>
-        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="podium_style_land">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_height">80dp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
-        <item name="android:background">@drawable/metallic3</item>
+        <item name="android:background">@drawable/metallic_background</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center</item>
-
     </style>
 </resources>

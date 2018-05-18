@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="primaryColor">#6a1b9a</color>
+    <color name="primaryLightColor">#9c4dcc</color>
+    <color name="primaryDarkColor">#38006b</color>
+    <color name="secondaryColor">#cddc39</color>
+    <color name="secondaryLightColor">#ffff6e</color>
+    <color name="secondaryDarkColor">#5c9ba8</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#000000</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="primaryColor2">#6a1b9a</color>
+    <color name="primaryDarkColor2">#127386</color>
+    <color name="primaryTextColor2">#ffffff</color>
+    <color name="blackBackground">#000000</color>
+    <color name="scoreColor">#00ff00</color>
+    <color name="nameTextColor">#C0C0C0</color>
+    <color name="blueGreen">#A6127386</color>
+    <color name="midGreen">#16677c</color>
+    <color name="crystalColor">#f5f5f5</color>
+    <color name="resetButton">#E6f9009e</color>
 </resources>

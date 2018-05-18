@@ -1,158 +1,178 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+Player avatar cartoon images from graphicmama.com,
+metallic background on podium is from pngfree.com
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.scorekeeper.MainActivity">
 
+    <!--Game Background Pattern Landscape Mode -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/app_background"
         android:scaleType="centerCrop"
-        android:src="@drawable/greed3"
-        tools:ignore="ContentDescription" />
+        android:src="@drawable/greedosity_background" />
 
-    <TextView
-        android:id="@+id/game_status_text_view"
+    <!--ScrollView containing the LinearLayout with the players and podiums-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <!--Linear Layout View showing the players Landscape Mode-->
+        <LinearLayout
+            android:id="@+id/myLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="true"
+            android:orientation="horizontal">
+
+            <!--Linear Layout showing Player 1 Landscape Mode-->
+            <LinearLayout style="@style/player_linear_layout">
+
+                <ImageView
+                    style="@style/avatar_style_land"
+                    android:contentDescription="@string/PlayerOneAvatarDescription"
+                    android:src="@drawable/suzy_avatar" />
+
+                <TextView
+                    style="@style/PlayerNameText_landscape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/PlayerOneName" />
+
+                <TextView
+                    android:id="@+id/suzy_earnings"
+                    style="@style/PlayerEarningsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/suzyTotal" />
+
+                <LinearLayout style="@style/podium_style_land">
+
+                    <Button
+                        style="@style/buttonStyles_land"
+                        android:onClick="addTenDollarsSuzy"
+                        android:text="@string/Button1Text" />
+
+                    <Button
+                        style="@style/buttonStyles_land"
+                        android:onClick="addFiftyDollarsSuzy"
+                        android:text="@string/Button2Text" />
+
+                    <Button
+                        style="@style/buttonStyles_land"
+                        android:layout_marginRight="@dimen/button_3_landscape_marginRight"
+                        android:onClick="surpriseSuzy"
+                        android:text="@string/Button3Text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Linear Layout showing Player 2 Landscape Mode-->
+            <LinearLayout style="@style/player_linear_layout">
+
+                <ImageView
+                    style="@style/avatar_style_land"
+                    android:contentDescription="@string/PlayerTwoAvatarDescription"
+                    android:src="@drawable/mike_avatar" />
+
+                <TextView
+                    style="@style/PlayerNameText_landscape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/PlayerTwoName" />
+
+                <TextView
+                    android:id="@+id/mike_earnings"
+                    style="@style/PlayerEarningsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mikeTotal" />
+
+                <LinearLayout style="@style/podium_style_land">
+
+                    <Button
+                        style="@style/buttonStyles_land"
+                        android:onClick="addTenDollarsMike"
+                        android:text="@string/Button1Text" />
+
+                    <Button
+                        style="@style/buttonStyles_land"
+                        android:onClick="addFiftyDollarsMike"
+                        android:text="@string/Button2Text" />
+
+                    <Button
+                        style="@style/buttonStyles_land"
+                        android:layout_marginRight="@dimen/button_3_landscape_marginRight"
+                        android:onClick="surpriseMike"
+                        android:text="@string/Button3Text" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!--Top Linear Layout with logo, game status bar, and reset button -->
+    <LinearLayout
+        android:id="@+id/top_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#000"
-        android:gravity="center_horizontal"
-        android:paddingBottom="2dp"
-        android:paddingTop="2dp"
-        android:text=""
-        android:textColor="#03fa15"
-        android:textSize="16sp"
-        android:visibility="invisible" />
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/greedosity"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_below="@id/game_status_text_view"
-        android:paddingTop="5dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/greedosity6"
-        tools:ignore="ContentDescription" />
+        <!--(Big) Game Logo Before Game Begins Landscape Mode -->
+        <ImageView
+            android:id="@+id/greedosity_logo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/big_logo_landscape_height"
+            android:layout_marginBottom="@dimen/big_logo_landscape_marginBottom"
+            android:layout_marginTop="@dimen/big_logo_landscape_marginTop"
+            android:contentDescription="@string/app_logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/greedosity_logo"
+            android:visibility="gone" />
 
-    <Button
-        android:id="@+id/reset_game_button"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_below="@+id/greedosity"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:background="#c51162"
-        android:onClick="resetGameScore"
-        android:padding="5dp"
-        android:text="@string/ResetButtonText"
-        android:textColor="#fff"
-        android:textSize="20sp" />
+        <!--(Small) Game Logo During Game Landscape Mode -->
+        <ImageView
+            android:id="@+id/greedosity_in_game_logo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_logo_landscape_height"
+            android:layout_marginBottom="@dimen/small_logo_landscape_marginBottom"
+            android:layout_marginTop="@dimen/small_logo_landscape_marginTop"
+            android:contentDescription="@string/app_logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/greedosity_logo"
+            android:visibility="visible" />
 
-    <LinearLayout
-        android:id="@+id/myLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
+        <!--Game Status Bar Landscape Mode -->
+        <TextView
+            android:id="@+id/game_status_text_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:background="@color/blackBackground"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/game_status_bar_landscape_paddingBottom"
+            android:paddingTop="@dimen/game_status_bar_landscape_paddingTop"
+            android:text=""
+            android:textAllCaps="true"
+            android:textColor="@color/scoreColor"
+            android:textSize="@dimen/game_status_bar_text_size"
+            android:visibility="gone" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:contentDescription="@string/PlayerOneAvatarDescription"
-                android:scaleType="centerInside"
-                android:src="@drawable/suzy333" />
-
-            <TextView
-                style="@style/PlayerNameText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/PlayerOneName" />
-
-            <TextView
-                android:id="@+id/suzy_earnings"
-                style="@style/PlayerEarningsText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/suzyTotal" />
-
-            <LinearLayout style="@style/podium_style_land">
-
-                <Button
-                    style="@style/buttonStyles_land"
-                    android:layout_weight="1"
-                    android:onClick="addTenDollarsSuzy"
-                    android:text="@string/Button1Text" />
-
-                <Button
-                    style="@style/buttonStyles_land"
-                    android:layout_weight="1"
-                    android:onClick="addFiftyDollarsSuzy"
-                    android:text="@string/Button2Text" />
-
-                <Button
-                    style="@style/buttonStyles_land"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="2"
-                    android:onClick="surpriseSuzy"
-                    android:text="@string/Button3Text" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:contentDescription="@string/PlayerTwoAvatarDescription"
-                android:scaleType="centerInside"
-                android:src="@drawable/mike333" />
-
-            <TextView
-                style="@style/PlayerNameText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/PlayerTwoName" />
-
-            <TextView
-                android:id="@+id/mike_earnings"
-                style="@style/PlayerEarningsText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/mikeTotal" />
-
-            <LinearLayout style="@style/podium_style_land">
-
-                <Button
-                    style="@style/buttonStyles_land"
-                    android:layout_weight="1"
-                    android:onClick="addTenDollarsMike"
-                    android:text="@string/Button1Text" />
-
-                <Button
-                    style="@style/buttonStyles_land"
-                    android:layout_weight="1"
-                    android:onClick="addFiftyDollarsMike"
-                    android:text="@string/Button2Text" />
-
-                <Button
-                    style="@style/buttonStyles_land"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="2"
-                    android:onClick="surpriseMike"
-                    android:text="@string/Button3Text" />
-            </LinearLayout>
-        </LinearLayout>
+        <!--Game Reset Button Landscape Mode-->
+        <Button
+            android:id="@+id/reset_game_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/game_reset_btn_landscape_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/game_reset_btn_landscape_marginTop"
+            android:background="@color/resetButton"
+            android:onClick="resetGameScore"
+            android:padding="@dimen/game_reset_btn_landscape_padding"
+            android:text="@string/ResetButtonText"
+            android:textColor="@color/primaryTextColor2"
+            android:textSize="@dimen/game_reset_btn_text_size" />
     </LinearLayout>
 </RelativeLayout>

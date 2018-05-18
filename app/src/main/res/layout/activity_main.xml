@@ -6,57 +6,66 @@
     android:fillViewport="true"
     tools:context="com.example.android.scorekeeper.MainActivity">
 
+    <!-- Player avatar cartoon images from graphicmama.com,
+        metallic background on podium is from pngfree.com -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--Game Background Pattern Portrait Mode -->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/app_background"
             android:scaleType="centerCrop"
-            android:src="@drawable/greed3"
-            tools:ignore="ContentDescription" />
+            android:src="@drawable/greedosity_background" />
 
+        <!--Game Logo Portrait Mode -->
         <ImageView
-            android:id="@+id/greedosity"
+            android:id="@+id/greedosity_logo"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="16dp"
+            android:layout_height="@dimen/game_logo_portrait_height"
+            android:layout_marginBottom="@dimen/game_logo_portrait_marginBottom"
+            android:layout_marginTop="@dimen/game_logo_portrait_marginTop"
+            android:contentDescription="@string/app_logo"
             android:scaleType="fitCenter"
-            android:src="@drawable/greedosity6"
-            tools:ignore="ContentDescription" />
+            android:src="@drawable/greedosity_logo"
+            android:visibility="visible" />
 
+        <!--Game Status Bar Portrait Mode  -->
         <TextView
             android:id="@+id/game_status_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/greedosity"
-            android:layout_marginTop="3dp"
-            android:background="#000"
+            android:layout_below="@id/greedosity_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/game_status_bar_portrait_marginBottom"
+            android:background="@color/blackBackground"
             android:gravity="center_horizontal"
-            android:paddingBottom="2dp"
-            android:paddingTop="2dp"
+            android:paddingBottom="@dimen/game_status_bar_portrait_paddingBottom"
+            android:paddingTop="@dimen/game_status_bar_portrait_paddingTop"
             android:text=""
-            android:textColor="#03fa15"
-            android:textSize="16sp"
-            android:visibility="invisible" />
+            android:textColor="@color/scoreColor"
+            android:textSize="@dimen/game_status_bar_text_size"
+            android:visibility="visible" />
 
+        <!--Game Reset Button Portrait Mode -->
         <Button
             android:id="@+id/reset_game_button"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@+id/game_status_text_view"
+            android:layout_height="@dimen/game_reset_btn_portrait_height"
+            android:layout_below="@id/game_status_text_view"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="3dp"
-            android:background="#f9009e"
+            android:layout_marginTop="@dimen/game_reset_btn_portrait_marginTop"
+            android:background="@color/resetButton"
+            android:gravity="center"
             android:onClick="resetGameScore"
-            android:padding="10dp"
+            android:padding="@dimen/game_reset_btn_portrait_padding"
             android:text="@string/ResetButtonText"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textColor="@color/primaryTextColor2"
+            android:textSize="@dimen/game_reset_btn_text_size" />
 
-
+        <!--Linear Layout View showing the players Portrait Mode -->
         <LinearLayout
             android:id="@+id/myLinearLayout"
             android:layout_width="match_parent"
@@ -65,18 +74,13 @@
             android:baselineAligned="false"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <!--Linear Layout showing Player 1 Portrait Mode -->
+            <LinearLayout style="@style/player_linear_layout">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    style="@style/avatar_style"
                     android:contentDescription="@string/PlayerOneAvatarDescription"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/suzy333" />
+                    android:src="@drawable/suzy_avatar" />
 
                 <TextView
                     style="@style/PlayerNameText"
@@ -110,18 +114,13 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <!--Linear Layout showing Player 2 Portrait Mode -->
+            <LinearLayout style="@style/player_linear_layout">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    style="@style/avatar_style"
                     android:contentDescription="@string/PlayerTwoAvatarDescription"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/mike333" />
+                    android:src="@drawable/mike_avatar" />
 
                 <TextView
                     style="@style/PlayerNameText"

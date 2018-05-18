@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Greedosity!</string>
+    <string name="app_logo">Picture showing game\'s logo</string>
+    <string name="app_background">Game Background Pattern</string>
     <string name="suzyTotal">$0</string>
     <string name="mikeTotal">$0</string>
     <string name="startNewGame">Good Luck! Let\'s begin!</string>
@@ -25,5 +27,5 @@
     <string name="ResetButtonText">New Game</string>
     <string name="Button1Text">$10</string>
     <string name="Button2Text">$50</string>
-    <string name="Button3Text">Surprise</string>
+    <string name="Button3Text">Greed!</string>
 </resources>

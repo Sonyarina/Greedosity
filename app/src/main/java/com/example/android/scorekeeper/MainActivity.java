@@ -1,8 +1,11 @@
 package com.example.android.scorekeeper;
 
+import android.content.res.Resources;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,17 +33,33 @@ public class MainActivity extends AppCompatActivity {
     TextView gameStatus;
     TextView suzyScoreDisplay;
     TextView mikeScoreDisplay;
+    ImageView bigLogo;
+    ImageView smallLogo;
 
+    //This variable will keep track of activity layout orientation
+    boolean isLandscapeMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gameStatus = (TextView) findViewById(R.id.game_status_text_view);
-        suzyScoreDisplay = (TextView) findViewById(R.id.suzy_earnings);
-        mikeScoreDisplay = (TextView) findViewById(R.id.mike_earnings);
+        gameStatus = findViewById(R.id.game_status_text_view);
+        suzyScoreDisplay = findViewById(R.id.suzy_earnings);
+        mikeScoreDisplay = findViewById(R.id.mike_earnings);
+        bigLogo = findViewById(R.id.greedosity_logo);
 
+        //Get screen orientation state from resource file
+        Resources res = getResources();
+        isLandscapeMode = res.getBoolean(R.bool.is_landscape);
+
+        //Only run the next few lines of code if the screen is in landscape mode
+        if (isLandscapeMode) {
+            Toast.makeText(MainActivity.this, "Landscape Mode", Toast.LENGTH_SHORT).show();
+            smallLogo = findViewById(R.id.greedosity_in_game_logo);
+        }
+
+        //Steps for if there was saved data
         if (savedInstanceState != null) {
 
             //Restore TextView with Game Status Message
@@ -55,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             mikeScoreDisplay.setText(savedMikeScoreView);
 
             //Restore data from the integer variables that kept track of score and other data
-
             scoreSuzy = savedInstanceState.getInt(SUZY_SCORE_KEY);
             scoreMike = savedInstanceState.getInt(MIKE_SCORE_KEY);
             numberOfTimesSuzyPicked50 = savedInstanceState.getInt(SUZY_PICKED_50_KEY);
@@ -63,11 +81,13 @@ public class MainActivity extends AppCompatActivity {
             numberOfTimesSuzySurprised = savedInstanceState.getInt(SUZY_SURPRISED_KEY);
             numberOfTimesMikeSurprised = savedInstanceState.getInt(MIKE_SURPRISED_KEY);
 
-
         } else {
             // Shows a "New Game" message on the screen if no information was saved
             Toast.makeText(MainActivity.this, "New Game", Toast.LENGTH_SHORT).show();
         }
+
+        //Adjust Visibility of views
+        adjustViewsVisibility();
     }
 
     @Override
@@ -94,6 +114,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Swaps out the visibility of views based on the state of the game
+     */
+    public void adjustViewsVisibility() {
+
+        if (scoreSuzy == 0 && scoreMike == 0 && numberOfTimesMikeSurprised == 0 && numberOfTimesSuzySurprised == 0) {
+
+            //Adjust Visibility of views
+            gameStatus.setVisibility(View.GONE);
+            bigLogo.setVisibility(View.VISIBLE);
+
+            //Only run the next few lines of code if the screen is in landscape mode
+            if (isLandscapeMode) {
+                smallLogo.setVisibility(View.GONE);
+            }
+
+        } else {
+            gameStatus.setVisibility(View.VISIBLE);
+
+            //Check for screen orientation, only run code if in Landscape mode
+            if (isLandscapeMode) {
+                bigLogo.setVisibility(View.GONE);
+                smallLogo.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    /**
      * Displays the given score for Suzy.
      */
     public void displayForSuzy(int score) {
@@ -107,11 +154,13 @@ public class MainActivity extends AppCompatActivity {
     public void addTenDollarsSuzy(View view) {
         //TextView gameStatus = (TextView) findViewById(R.id.game_status_text_view);
         gameStatus.setText(getString(R.string.tenDollarsSuzy));
-        //Make Game Status Visible
-        gameStatus.setVisibility(View.VISIBLE);
+
         numberOfTimesSuzySurprised = 0;
         scoreSuzy = scoreSuzy + 10;
         displayForSuzy(scoreSuzy);
+
+        //Call Method to adjust views
+        adjustViewsVisibility();
     }
 
     /**
@@ -120,21 +169,24 @@ public class MainActivity extends AppCompatActivity {
     public void addFiftyDollarsSuzy(View view) {
         //TextView gameStatus = (TextView) findViewById(R.id.game_status_text_view);
         gameStatus.setText(getString(R.string.fiftyDollarsSuzy));
-        //Make Game Status Visible
-        gameStatus.setVisibility(View.VISIBLE);
+
         numberOfTimesSuzySurprised = 0;
         scoreSuzy = scoreSuzy + 50;
         numberOfTimesSuzyPicked50 = numberOfTimesSuzyPicked50 + 1;
         displayForSuzy(scoreSuzy);
+
         //Shows number of times Suzy picked $50 button
         Toast.makeText(MainActivity.this,
                 "Suzy $50 clicks: " +
                         numberOfTimesSuzyPicked50,
                 Toast.LENGTH_LONG).show();
+
+        //Call Method to adjust views
+        adjustViewsVisibility();
     }
 
     /**
-     * If the player has zero dollars, the Surprise button adds a random
+     * If the player has zero dollars, the GREED! (Surprise) button adds a random
      * amount of money between $10 and $50. Otherwise, this method looks at the number
      * of times the player has selected the $50 button since that player's score was reset to 0
      * (either through a Surprise or Game Reset). The number of times the player has selected $50
@@ -153,23 +205,26 @@ public class MainActivity extends AppCompatActivity {
     public void surpriseSuzy(View view) {
         //Creates temporary string to store Suzy Game Alert Message
         String suzyStatusMsg;
-        // TextView gameStatus = (TextView) findViewById(R.id.game_status_text_view);
+
         numberOfTimesSuzySurprised = numberOfTimesSuzySurprised + 1;
+
+        //Call Method to adjust views
+        adjustViewsVisibility();
+
         //This if statement prevents the player from choosing Surprise twice in a row
         if (numberOfTimesSuzySurprised >= 2) {
             suzyStatusMsg = "Sorry, Suzy. " + getString(R.string.noDoubleSurprise);
             gameStatus.setText(suzyStatusMsg);
-            //Make Game Status Visible
-            gameStatus.setVisibility(View.VISIBLE);
+
         } else {
             if (scoreSuzy == 0) {
                 //Creates random integer between 10 and 50
                 scoreSuzy = 10 + (int) (Math.random() * (41));
                 suzyStatusMsg = getString(R.string.surpriseAmountEarnedSuzy) + scoreSuzy;
+
                 //Display game status message
                 gameStatus.setText(suzyStatusMsg);
-                //Make Game Status Visible
-                gameStatus.setVisibility(View.VISIBLE);
+
                 //Display Suzy's updated earnings
                 displayForSuzy(scoreSuzy);
 
@@ -177,44 +232,47 @@ public class MainActivity extends AppCompatActivity {
                 if (numberOfTimesSuzyPicked50 == 1) {
                     scoreSuzy = scoreSuzy * 2;
                     suzyStatusMsg = getString(R.string.doubleEarningsSuzy);
+
                     //Display game status message
                     gameStatus.setText(suzyStatusMsg);
-                    //Make Game Status Visible
-                    gameStatus.setVisibility(View.VISIBLE);
+
                     //Display Suzy's updated earnings
                     displayForSuzy(scoreSuzy);
+
                 } else if (numberOfTimesSuzyPicked50 == 0) {
                     scoreSuzy = scoreSuzy * 3;
                     suzyStatusMsg = getString(R.string.tripleEarningsSuzy);
+
                     //Display game status message
                     gameStatus.setText(suzyStatusMsg);
-                    //Make Game Status Visible
-                    gameStatus.setVisibility(View.VISIBLE);
+
                     //Display Suzy's updated earnings
                     displayForSuzy(scoreSuzy);
 
                 } else {
+
                     //Creates random integer between 1 and 10 and checks if less than 5
                     int random = 1 + (int) (Math.random() * (10));
                     if (random <= 5) {
+
                         //Sets Suzy's earnings to zero and resets $50 count to 0
                         scoreSuzy = 0;
                         numberOfTimesSuzyPicked50 = 0;
                         suzyStatusMsg = getString(R.string.backToZeroSuzy);
+
                         //Display game status message
                         gameStatus.setText(suzyStatusMsg);
-                        //Make Game Status Visible
-                        gameStatus.setVisibility(View.VISIBLE);
+
                         //Display Suzy's updated earnings
                         displayForSuzy(scoreSuzy);
                     } else {
                         //If the random integer created in the if statement was 6 or more
                         scoreSuzy = scoreSuzy * 3;
                         suzyStatusMsg = getString(R.string.tripleEarningsSuzy);
+
                         //Display game status message
                         gameStatus.setText(suzyStatusMsg);
-                        //Make Game Status Visible
-                        gameStatus.setVisibility(View.VISIBLE);
+
                         //Display Suzy's updated earnings
                         displayForSuzy(scoreSuzy);
                     }
@@ -227,7 +285,6 @@ public class MainActivity extends AppCompatActivity {
      * Displays the given score for Mike.
      */
     public void displayForMike(int score) {
-        //TextView scoreView = (TextView) findViewById(R.id.mike_earnings);
         mikeScoreDisplay.setText(NumberFormat.getCurrencyInstance().format(score));
     }
 
@@ -235,23 +292,22 @@ public class MainActivity extends AppCompatActivity {
      * Mike's $10 button was clicked.
      */
     public void addTenDollarsMike(View view) {
-        //TextView gameStatus = (TextView) findViewById(R.id.game_status_text_view);
         gameStatus.setText(getString(R.string.tenDollarsMike));
-        //Make Game Status Visible
-        gameStatus.setVisibility(View.VISIBLE);
+
         numberOfTimesMikeSurprised = 0;
         scoreMike = scoreMike + 10;
         displayForMike(scoreMike);
+
+        //Call Method to adjust views
+        adjustViewsVisibility();
     }
 
     /**
      * Mike's $50 button was clicked.
      */
     public void addFiftyDollarsMike(View view) {
-        //TextView gameStatus = (TextView) findViewById(R.id.game_status_text_view);
         gameStatus.setText(getString(R.string.fiftyDollarsMike));
-        //Make Game Status Visible
-        gameStatus.setVisibility(View.VISIBLE);
+
         numberOfTimesMikeSurprised = 0;
         scoreMike = scoreMike + 50;
         numberOfTimesMikePicked50 = numberOfTimesMikePicked50 + 1;
@@ -261,10 +317,13 @@ public class MainActivity extends AppCompatActivity {
                 "Mike $50 clicks: " +
                         numberOfTimesMikePicked50,
                 Toast.LENGTH_LONG).show();
+
+        //Call Method to adjust views
+        adjustViewsVisibility();
     }
 
     /**
-     * If the player has zero dollars, the Surprise button adds a random
+     * If the player has zero dollars, the GREED! (Surprise) button adds a random
      * amount of money between $10 and $50. Otherwise, this method looks at the number
      * of times the player has selected the $50 button since that player's score was reset to 0
      * (either through a Surprise or Game Reset). The number of times the player has selected $50
@@ -282,23 +341,25 @@ public class MainActivity extends AppCompatActivity {
     public void surpriseMike(View view) {
         //Creates temporary string to store Mike Game Alert Message
         String mikeStatusMsg;
-        //TextView gameStatus = (TextView) findViewById(R.id.game_status_text_view);
         numberOfTimesMikeSurprised = numberOfTimesMikeSurprised + 1;
+
+        //Call Method to adjust views
+        adjustViewsVisibility();
+
         //This if statement prevents the player from choosing Surprise twice in a row
         if (numberOfTimesMikeSurprised >= 2) {
             mikeStatusMsg = "Sorry, Mike. " + getString(R.string.noDoubleSurprise);
             gameStatus.setText(mikeStatusMsg);
-            //Make Game Status Visible
-            gameStatus.setVisibility(View.VISIBLE);
+
         } else {
             if (scoreMike == 0) {
                 //Creates random integer between 10 and 50
                 scoreMike = 10 + (int) (Math.random() * (41));
                 mikeStatusMsg = getString(R.string.surpriseAmountEarnedMike) + scoreMike;
+
                 //Display game status message
                 gameStatus.setText(mikeStatusMsg);
-                //Make Game Status Visible
-                gameStatus.setVisibility(View.VISIBLE);
+
                 //Display Mike's updated earnings
                 displayForMike(scoreMike);
 
@@ -306,19 +367,20 @@ public class MainActivity extends AppCompatActivity {
                 if (numberOfTimesMikePicked50 == 1) {
                     scoreMike = scoreMike * 2;
                     mikeStatusMsg = getString(R.string.doubleEarningsMike);
+
                     //Display game status message
                     gameStatus.setText(mikeStatusMsg);
-                    //Make Game Status Visible
-                    gameStatus.setVisibility(View.VISIBLE);
+
                     //Display Mike's updated earnings
                     displayForMike(scoreMike);
+
                 } else if (numberOfTimesMikePicked50 == 0) {
                     scoreMike = scoreMike * 3;
                     mikeStatusMsg = getString(R.string.tripleEarningsMike);
+
                     //Display game status message
                     gameStatus.setText(mikeStatusMsg);
-                    //Make Game Status Visible
-                    gameStatus.setVisibility(View.VISIBLE);
+
                     //Display Mike's updated earnings
                     displayForMike(scoreMike);
 
@@ -330,20 +392,20 @@ public class MainActivity extends AppCompatActivity {
                         scoreMike = 0;
                         numberOfTimesMikePicked50 = 0;
                         mikeStatusMsg = getString(R.string.backToZeroMike);
+
                         //Display game status message
                         gameStatus.setText(mikeStatusMsg);
-                        //Make Game Status Visible
-                        gameStatus.setVisibility(View.VISIBLE);
+
                         //Display Mike's updated earnings
                         displayForMike(scoreMike);
                     } else {
                         //If the random integer created in the if statement was 6 or more
                         scoreMike = scoreMike * 3;
                         mikeStatusMsg = getString(R.string.tripleEarningsMike);
+
                         //Display game status message
                         gameStatus.setText(mikeStatusMsg);
-                        //Make Game Status Visible
-                        gameStatus.setVisibility(View.VISIBLE);
+
                         //Display Mike's updated earnings
                         displayForMike(scoreMike);
                     }
@@ -356,10 +418,8 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the "New Game" button is clicked.
      */
     public void resetGameScore(View view) {
-        //TextView gameStatus = (TextView) findViewById(R.id.game_status_text_view);
         gameStatus.setText(getString(R.string.startNewGame));
-        //Make Game Status Visible
-        gameStatus.setVisibility(View.VISIBLE);
+
         scoreSuzy = 0;
         scoreMike = 0;
         displayForSuzy(scoreSuzy);
@@ -368,5 +428,8 @@ public class MainActivity extends AppCompatActivity {
         numberOfTimesMikePicked50 = 0;
         numberOfTimesSuzySurprised = 0;
         numberOfTimesMikeSurprised = 0;
+
+        //Call Method to adjust views
+        adjustViewsVisibility();
     }
 }
